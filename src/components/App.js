@@ -10,6 +10,7 @@ function App() {
   const [page, setPage] = useState("List");
   const [getQuestions, setGetQuestions] = useState([])
 
+
   // GET REQUEST
 
   useEffect(() => {
@@ -18,10 +19,25 @@ function App() {
     .then(r => (setGetQuestions(r)))
   }, [])
 
+  // WORKING WITH POST REQUEST
+
+  function handleAddQuestion(newQuestionObj) {
+    setGetQuestions([...getQuestions, newQuestionObj]);
+  }
+
+  // DELETE REQUEST -- PASS INTO QUESTIONITEM
+
+  // function handleDeleteClick(){
+  //   fetch(``, {
+  //     method: "DELETE",
+  //   })
+  // }
+    
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm setGetQuestions={setGetQuestions}/> : <QuestionList getQuestions={getQuestions}/>}
+      {page === "Form" ? <QuestionForm setGetQuestions={setGetQuestions} handleAddQuestion={handleAddQuestion}/> : <QuestionList getQuestions={getQuestions}/>}
     </main>
   );
 }
