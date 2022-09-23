@@ -27,17 +27,16 @@ function App() {
 
   // DELETE REQUEST -- PASS INTO QUESTIONITEM
 
-  // function handleDeleteClick(){
-  //   fetch(``, {
-  //     method: "DELETE",
-  //   })
-  // }
+  function handleDeleteQuestion(deletedQuestion){
+    const updatedQuestions = getQuestions.filter((q) => q.id !== deletedQuestion.id)
+    setGetQuestions(updatedQuestions)
+  }
     
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm setGetQuestions={setGetQuestions} handleAddQuestion={handleAddQuestion}/> : <QuestionList getQuestions={getQuestions}/>}
+      {page === "Form" ? <QuestionForm setGetQuestions={setGetQuestions} handleAddQuestion={handleAddQuestion}/> : <QuestionList handleDeleteQuestion={handleDeleteQuestion} getQuestions={getQuestions}/>}
     </main>
   );
 }
